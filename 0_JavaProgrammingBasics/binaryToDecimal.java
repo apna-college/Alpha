@@ -16,10 +16,10 @@ public class binaryToDecimal{
     }
     public static void main(String args[]){
         Scanner sc = new Scanner(System.in);
-        System.out.print("Input decimal number: ");
+        System.out.print("Input binary number: ");
         int bin = sc.nextInt();
 
-        System.out.print(bin2dec(bin));
+        System.out.print("decimal number is" + bin2dec(bin));
 
         sc.close();
     }
