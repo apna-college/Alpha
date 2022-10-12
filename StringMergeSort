@@ -1,0 +1,69 @@
+public class StringMergeSort
+{
+
+    public static void sort(String n[],int si,int ei)
+    {  
+     
+        int mid= si+(ei-si)/2;
+        if(si>=ei)//base case
+        {
+            return;
+        }
+        sort(n,si,mid);//left part
+        sort(n,mid+1,ei);//right part
+        merge(n,si,mid,ei);
+    
+    }
+    public static void merge(String n[],int si,int mid,int ei)
+    {
+        String m[]=new String[ei-si+1];//temp array
+        int i=si;//iterator for left part
+
+        int j=mid+1;//iterator for right part
+        int k=0;
+
+        while(i<=mid&& j<=ei)
+        {
+            if(n[i].compareTo(n[j])<0)
+            {
+                m[k]=n[i];
+                i++;
+                k++;
+            }
+            else 
+            {
+                m[k]=n[j];
+                j++;
+                k++;
+            }
+        }
+        while(i<=mid)//for leftout elements of left side
+        {
+            m[k++]=n[i++];
+        }
+        while(j<=ei)//for leftout elements of right side
+        { 
+            m[k++]=n[j++];
+        }
+        for(k=0,i=si;k<m.length;++k,++i)
+        {
+            n[i]=m[k];
+        }
+        
+    }
+    public static void print(String n[])
+    {   
+        for(int i=0;i<n.length;++i)
+        {
+        System.out.print(n[i]+" ");
+        }
+        System.out.println();
+    }
+    public static void main(String args[])
+    {
+        String n[]={"earth","mars","jupiter"};
+        sort(n,0,n.length-1);
+        print(n);
+
+    }
+}
