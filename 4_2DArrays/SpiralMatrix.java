@@ -1,51 +1,48 @@
 import java.util.*;
 
-//Problem : Print a Matrix in Spiral Fashion
-
 public class SpiralMatrix {
-    public static void printSpiral(int matrix[][]) {
+    public static List<Integer> printSpiral(int[][] matrix) {
         int startRow = 0;
         int startCol = 0;
         int endRow = matrix.length-1;
         int endCol = matrix[0].length-1;
+        List<Integer> list = new ArrayList<Integer>();
 
-        //print boundaries
-        while(startRow <= endCol && startCol <= endCol) {
-            for(int j=startCol; j<=endCol; j++) {
-                System.out.print(matrix[startRow][j]+" ");
-            }
-            
-            for(int i=startRow+1; i<=endRow; i++) {
-                System.out.print(matrix[i][endCol]+" ");
-            }
+        while(startCol <= endRow && startRow <= endCol){
+            for(int i=startRow; i<=endCol; i++)
+               list.add(matrix[startCol][i]);
+            startCol++;
 
-            for(int j=endCol-1; j>=startCol; j--) {
-                if(startRow == endRow) {
-                    break;
-                }
-                System.out.print(matrix[endRow][j]+" ");
-            }
+            for(int i=startCol; i<=endRow; i++)
+                list.add(matrix[i][endCol]);
+            endCol--;
 
-            for(int i=endRow-1; i>startRow; i--) {
-                if(startCol == endCol) {
-                    break;
-                }
-                System.out.print(matrix[i][startCol]+" ");
+            if (startCol <= endRow){
+                for(int i=endCol; i>=startRow; i--)
+                    list.add(matrix[endRow][i]);
+                endRow--;
             }
 
-            startCol++; startRow++;
-            endCol--; endRow--;
+            if (startRow <= endCol){
+                for(int i=endRow; i>=startCol; i--)
+                    list.add(matrix[i][startRow]);
+                startRow++;
+            }
         }
 
-        System.out.println();
+        return list;
     }
-
-    public static void main(String args[]) {
-        int matrix[][] = {{1, 2, 3, 4},
-                        {5, 6, 7, 8},
-                        {9, 10, 11, 12},
-                        {13, 14, 15, 16}};
-        printSpiral(matrix);
+    
+    public static void main(String[] args) {
+        int[][] matrix1 = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
+        System.out.println(printSpiral(matrix1));
+        int[][] matrix2 = {{1,2,3},{4,5,6},{7,8,9}};
+        System.out.println(printSpiral(matrix2));
     }
 }
-  
+
+/*
+OUTPUT:
+1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10 
+1 2 3 6 9 8 7 4 5 
+*/
